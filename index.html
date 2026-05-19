@@ -362,9 +362,13 @@
                 void canvas.offsetWidth; // Trigger reflow
                 canvas.classList.add('canvas-text-animate');
 
+                // فحص ما إذا كان النص يحتوي على أحرف إنجليزية لتغيير الخط
+                const isEnglish = /[a-zA-Z]/.test(name);
+                const fontFamily = isEnglish ? "'Avenir Next Heavy', sans-serif" : "'Almarai', sans-serif";
+
                 // إعدادات الخط الأساسية
                 let baseFontSize = canvas.width * 0.055; 
-                ctx.font = `800 ${baseFontSize}px 'Almarai'`;
+                ctx.font = `800 ${baseFontSize}px ${fontFamily}`;
                 ctx.fillStyle = '#005a56'; 
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
@@ -383,7 +387,7 @@
                     // تصغير الخط تدريجياً إذا كان الاسم طويلاً
                     const scaleRatio = maxWidth / textWidth;
                     baseFontSize = baseFontSize * scaleRatio;
-                    ctx.font = `800 ${baseFontSize}px 'Almarai'`;
+                    ctx.font = `800 ${baseFontSize}px ${fontFamily}`;
                 }
 
                 // إحداثيات الكتابة (منتصف العرض، ونقطة محددة للارتفاع)
